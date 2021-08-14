@@ -19,7 +19,6 @@ public class UserController {
 
     @GetMapping("/{userid}")
     private User getUsedrDetails(@PathVariable("userid") String userId) {
-        System.out.println(userService.displayUserMetaData(userId));
         return userService.displayUserMetaData(userId);
     }
 }
