@@ -1,1 +1,1 @@
-web: java -jar build/libs/instagram-0.0.1-SNAPSHOT.jar
+web: java -Dserver.port=8080 -jar build/libs/instagram-0.0.1-SNAPSHOT.jar
