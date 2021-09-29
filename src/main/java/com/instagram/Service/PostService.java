@@ -40,4 +40,8 @@ public class PostService {
         Collections.sort(postArrayList, (a, b)->b.getId()-a.getId());
         return postArrayList;
     }
+
+    public ArrayList<Post> displayPostsByUser(String userId) {
+        return postRepo.findPostsByUserId(userId);
+    }
 }

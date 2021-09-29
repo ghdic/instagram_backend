@@ -6,6 +6,8 @@ import com.instagram.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+
 @Service
 public class UserService {
 
@@ -14,6 +16,10 @@ public class UserService {
 
     public User submitMetaDataOfUser (User user) {
         return userRepo.save(user);
+    }
+
+    public ArrayList<User> getAllUserData() {
+        return userRepo.findAll();
     }
 
     public User displayUserMetaData(String userId){

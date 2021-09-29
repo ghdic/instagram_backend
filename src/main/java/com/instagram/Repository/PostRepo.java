@@ -8,4 +8,5 @@ import java.util.ArrayList;
 public interface PostRepo extends CrudRepository<Post, Integer> {
     Post save(Post post);
     ArrayList<Post> findAll();
+    ArrayList<Post> findPostsByUserId(String userId);
 }

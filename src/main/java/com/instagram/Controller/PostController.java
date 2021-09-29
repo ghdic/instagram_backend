@@ -23,4 +23,9 @@ public class PostController {
     private ArrayList<Post> getAllPost() {
         return postService.retrivePostFromDB();
     }
+
+    @GetMapping("/{userid}")
+    private ArrayList<Post> getPostsByUser(@PathVariable("userid") String userId) {
+        return postService.displayPostsByUser(userId);
+    }
 }
