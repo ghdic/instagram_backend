@@ -4,8 +4,12 @@ import com.instagram.Repository.PostRepo;
 import com.instagram.model.Post;
 import com.instagram.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -19,29 +23,35 @@ public class PostService {
     UserService userService;
 
     public Post submitPostToDataBase(Post post) {
-        Post result = postRepo.save(post);
-        User user = userService.displayUserMetaData(post.getUserId());
-        if(user != null) {
-            result.setUserName(user.getUserName());
-        }
-        return result;
+        post.setUser(userService.displayUserMetaData(post.getUid()));
+        post.setCreateDate(LocalDateTime.now(ZoneId.of("Asia/Seoul")));
+        return postRepo.save(post);
+    }
+
+    public Post updatePostToDatabase(int postId, String uid, String content, String postPath) {
+        Post post = postRepo.findPostByPostId(postId);
+        if(post == null || !post.getUser().getUid().equals(uid))
+            return null;
+        post.setContent(content);
+        post.setPostPath(postPath);
+        postRepo.save(post);
+        return post;
+    }
+
+    public int deletePostToDatabase(int postId, String uid) {
+        Post post = postRepo.findPostByPostId(postId);
+        if(post == null || !post.getUser().getUid().equals(uid))
+            return -1;
+        postRepo.deleteByPostId(postId);
+        return 0;
     }
 
     public ArrayList<Post> retrivePostFromDB() {
-        ArrayList<Post> postArrayList = postRepo.findAll();
+        return postRepo.findAll(Sort.by(Sort.Direction.DESC, "id"));
 
-        for(int i = 0; i < postArrayList.size(); i++) {
-            Post post = postArrayList.get(i);
-            User user = userService.displayUserMetaData(post.getUserId());
-            if(user != null) {
-                post.setUserName(user.getUserName());
-            }
-        }
-        Collections.sort(postArrayList, (a, b)->b.getId()-a.getId());
-        return postArrayList;
     }
 
-    public ArrayList<Post> displayPostsByUser(String userId) {
-        return postRepo.findPostsByUserId(userId);
+    public ArrayList<Post> displayPostsByUser(String uid) {
+        return postRepo.findPostsByUid(Sort.by(Sort.Direction.DESC, "id") ,uid);
     }
 }

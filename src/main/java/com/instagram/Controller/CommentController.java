@@ -20,7 +20,17 @@ public class CommentController {
     }
 
     @GetMapping("/{postId}")
-    private ArrayList<Comments> getCommentsForPost(@PathVariable("postId")String postId) {
+    private ArrayList<Comments> getCommentsForPost(@PathVariable("postId")int postId) {
         return commentService.getAllCommentsForDB(postId);
+    }
+
+    @PostMapping("/{commentId}")
+    private Comments updateComments(@PathVariable("commentId") int commentId, @RequestBody String uid, @RequestBody String content) {
+        return commentService.updateCommentToDB(commentId, uid, content);
+    }
+
+    @DeleteMapping("/{commentId}")
+    private int deleteComents(@PathVariable("commentId") int commentId, @RequestBody String uid) {
+        return commentService.deleteCommentToDB(commentId, uid);
     }
 }

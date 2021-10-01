@@ -1,89 +1,41 @@
 package com.instagram.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import java.sql.Timestamp;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Getter;
+import lombok.Setter;
 
+import javax.persistence.*;
+import java.time.LocalDateTime;
+
+@Getter
+@Setter
 @Entity(name = "Comments")
 public class Comments {
     @Id
     @GeneratedValue
-    private int id;
-
-    private String commentId;
-    private String userId;
-    private String userName;
-    private String postId;
-    private Timestamp timeStamp;
+    private int commentId;
+    private int postId;
+    @Transient
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private String uid;
+    @ManyToOne(targetEntity=User.class)
+    @JoinColumn(name = "uid") // 멤버변수이름_외래키이름
+    private User user;
+    @Column(updatable = false)
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    private LocalDateTime createDate;
     private String comment;
 
     public Comments() {
         super();
     }
 
-    public Comments(int id, String commentId, String userId, String postId, Timestamp timeStamp, String comment) {
-        this.id = id;
+    public Comments(int commentId, int postId, String uid, User user, LocalDateTime createDate, String comment) {
         this.commentId = commentId;
-        this.userId = userId;
         this.postId = postId;
-        this.timeStamp = timeStamp;
-        this.comment = comment;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getCommentId() {
-        return commentId;
-    }
-
-    public void setCommentId(String commentId) {
-        this.commentId = commentId;
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
-
-    public String getPostId() {
-        return postId;
-    }
-
-    public void setPostId(String postId) {
-        this.postId = postId;
-    }
-
-    public Timestamp getTimeStamp() {
-        return timeStamp;
-    }
-
-    public void setTimeStamp(Timestamp timeStamp) {
-        this.timeStamp = timeStamp;
-    }
-
-    public String getComment() {
-        return comment;
-    }
-
-    public void setComment(String comment) {
+        this.uid = uid;
+        this.user = user;
+        this.createDate = createDate;
         this.comment = comment;
     }
 }

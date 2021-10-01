@@ -10,5 +10,7 @@ import java.util.ArrayList;
 public interface CommentRepo extends CrudRepository<Comments, Integer> {
 
     Comments save(Comments comments);
-    ArrayList<Comments> findAllByPostId(String postId);
+    Comments findCommentsByCommentId(int commentId);
+    ArrayList<Comments> findAllByPostId(int postId);
+    void deleteCommentsByCommentId(int commentId);
 }

@@ -24,8 +24,18 @@ public class PostController {
         return postService.retrivePostFromDB();
     }
 
-    @GetMapping("/{userid}")
-    private ArrayList<Post> getPostsByUser(@PathVariable("userid") String userId) {
-        return postService.displayPostsByUser(userId);
+    @PostMapping("/{postId}")
+    private Post updateUserPost(@PathVariable("postId") int postId,  @RequestBody String uid, @RequestBody String content, @RequestBody String postPath) {
+        return postService.updatePostToDatabase(postId, uid, content, postPath);
+    }
+
+    @DeleteMapping("/{postId}")
+    private int deleteUserPost(@PathVariable("postId") int postId, @RequestBody String uid) {
+        return postService.deletePostToDatabase(postId, uid);
+    }
+
+    @GetMapping("/{uid}")
+    private ArrayList<Post> getPostsByUser(@PathVariable("uid") String uid) {
+        return postService.displayPostsByUser(uid);
     }
 }

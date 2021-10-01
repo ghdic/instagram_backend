@@ -24,8 +24,13 @@ public class UserController {
         return userService.getAllUserData();
     }
 
-    @GetMapping("/{userid}")
-    private User getUsedrDetails(@PathVariable("userid") String userId) {
-        return userService.displayUserMetaData(userId);
+    @GetMapping("/{uid}")
+    private User getUserDetails(@PathVariable("uid") String uid) {
+        return userService.displayUserMetaData(uid);
+    }
+
+    @PostMapping("/{uid}")
+    private User updateUser(@PathVariable("uid") String uid, @RequestBody String userName, @RequestBody String nickName, @RequestBody String profileImage) {
+        return userService.updateUserData(uid, userName, nickName, profileImage);
     }
 }

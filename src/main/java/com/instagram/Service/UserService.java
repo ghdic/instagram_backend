@@ -4,6 +4,7 @@ package com.instagram.Service;
 import com.instagram.Repository.UserRepo;
 import com.instagram.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -19,10 +20,24 @@ public class UserService {
     }
 
     public ArrayList<User> getAllUserData() {
-        return userRepo.findAll();
+        return userRepo.findAll(Sort.by(Sort.Direction.DESC, "id"));
     }
 
-    public User displayUserMetaData(String userId){
-        return userRepo.findByUserId(userId);
+    public User displayUserMetaData(String uid){
+        return userRepo.findByUid(uid);
+    }
+
+    public User updateUserData(String uid, String userName, String nickName, String profileImage) {
+        User user = userRepo.findByUid(uid);
+
+        if(user == null)
+            return null;
+
+        user.setUserName(userName);
+        user.setNickName(nickName);
+        user.setProfileImage(profileImage);
+
+        userRepo.save(user);
+        return user;
     }
 }

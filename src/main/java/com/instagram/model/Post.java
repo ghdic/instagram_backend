@@ -1,89 +1,47 @@
 package com.instagram.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import java.sql.Timestamp;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Getter;
+import lombok.Setter;
+import org.hibernate.annotations.ColumnDefault;
 
+import javax.persistence.*;
+import java.time.LocalDateTime;
+
+@Getter
+@Setter
 @Entity(name="Post")
 public class Post {
     @Id
     @GeneratedValue
-    private int Id;
+    private int postId;
 
-    private String postId;
-    private String userId;
-    private String userName;
+    @Transient
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private String uid;
+    @ManyToOne(targetEntity=User.class)
+    @JoinColumn(name = "uid") // 멤버변수이름_외래키이름
+    private User user;
+    private String content;
     private String postPath;
-    private Timestamp timeStamp;
+    @Column(updatable = false)
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    private LocalDateTime createDate;
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    @ColumnDefault("0")
     private int likeCount;
 
     public Post() {
         super();
     }
 
-    public Post(int id, String postId, String userId, String postPath, Timestamp timeStamp, int likeCount) {
-        Id = id;
+    public Post(int postId, String uid, User user, String content, String postPath, LocalDateTime createDate, int likeCount) {
         this.postId = postId;
-        this.userId = userId;
+        this.uid = uid;
+        this.user = user;
+        this.content = content;
         this.postPath = postPath;
-        this.timeStamp = timeStamp;
-        this.likeCount = likeCount;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public int getId() {
-        return Id;
-    }
-
-    public void setId(int id) {
-        Id = id;
-    }
-
-    public String getPostId() {
-        return postId;
-    }
-
-    public void setPostId(String postId) {
-        this.postId = postId;
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
-
-    public String getPostPath() {
-        return postPath;
-    }
-
-    public void setPostPath(String postPath) {
-        this.postPath = postPath;
-    }
-
-    public Timestamp getTimeStamp() {
-        return timeStamp;
-    }
-
-    public void setTimeStamp(Timestamp timeStamp) {
-        this.timeStamp = timeStamp;
-    }
-
-    public int getLikeCount() {
-        return likeCount;
-    }
-
-    public void setLikeCount(int likeCount) {
+        this.createDate = createDate;
         this.likeCount = likeCount;
     }
 }
