@@ -10,6 +10,7 @@ import java.util.ArrayList;
 @Repository
 public interface UserRepo extends CrudRepository<User, Integer> {
     User save(User user);
-    ArrayList<User> findAll(Sort sort);
+    ArrayList<User> findAll();
+    ArrayList<User> findFirst10ByOrderByIdDesc();
     User findByUid(String uid);
 }

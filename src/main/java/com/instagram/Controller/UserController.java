@@ -33,4 +33,9 @@ public class UserController {
     private User updateUser(@PathVariable("uid") String uid, @RequestBody String userName, @RequestBody String nickName, @RequestBody String profileImage) {
         return userService.updateUserData(uid, userName, nickName, profileImage);
     }
+
+    @GetMapping("/suggestions")
+    private ArrayList<User> suggetionUsers() {
+        return userService.getRecentlyRegisterUser();
+    }
 }

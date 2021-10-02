@@ -20,7 +20,11 @@ public class UserService {
     }
 
     public ArrayList<User> getAllUserData() {
-        return userRepo.findAll(Sort.by(Sort.Direction.DESC, "id"));
+        return userRepo.findAll();
+    }
+
+    public ArrayList<User> getRecentlyRegisterUser() {
+        return userRepo.findFirst10ByOrderByIdDesc();
     }
 
     public User displayUserMetaData(String uid){
