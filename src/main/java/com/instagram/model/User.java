@@ -3,6 +3,7 @@ package com.instagram.model;
 import com.sun.istack.NotNull;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -21,6 +22,7 @@ public class User {
     private String uid;
     private String userName;
     private String nickName;
+    @ColumnDefault("")
     private String profileImage;
 
     public User() {
