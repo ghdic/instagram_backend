@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 @Service
 public class PostService {
@@ -47,8 +48,7 @@ public class PostService {
     }
 
     public ArrayList<Post> retrivePostFromDB() {
-        return postRepo.findAll(Sort.by(Sort.Direction.DESC, "id"));
-
+        return postRepo.findAll(Sort.by(Sort.Direction.DESC, "postId"));
     }
 
     public ArrayList<Post> displayPostsByUser(String uid) {
