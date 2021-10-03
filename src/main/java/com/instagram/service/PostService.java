@@ -49,7 +49,7 @@ public class PostService {
     }
 
     public ArrayList<Post> displayPostsByUser(String uid) {
-        return postRepo.findPostsByUid(Sort.by(Sort.Direction.DESC, "id") ,uid);
+        return postRepo.findPostsByUser_Uid(Sort.by(Sort.Direction.DESC, "postId") ,uid);
     }
 
     public Post likeCountUpdate(int postId) {

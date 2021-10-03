@@ -12,6 +12,6 @@ public interface PostRepo extends JpaRepository<Post, Integer> {
     Post save(Post post);
     Post findPostByPostId(int postId);
     ArrayList<Post> findAll(Sort sort);
-    ArrayList<Post> findPostsByUid(Sort sort, String uid);
+    ArrayList<Post> findPostsByUser_Uid(Sort sort, String user_uid);
     void deleteByPostId(int postId);
 }
