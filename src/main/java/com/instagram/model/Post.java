@@ -23,6 +23,7 @@ public class Post {
     @JoinColumn(name = "uid") // 멤버변수이름_외래키이름
     private User user;
     private String content;
+    @Column(length = 1024)
     private String postPath;
     @Column(updatable = false)
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
