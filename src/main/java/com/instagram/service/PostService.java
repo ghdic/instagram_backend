@@ -51,4 +51,13 @@ public class PostService {
     public ArrayList<Post> displayPostsByUser(String uid) {
         return postRepo.findPostsByUid(Sort.by(Sort.Direction.DESC, "id") ,uid);
     }
+
+    public Post likeCountUpdate(int postId) {
+        Post post = postRepo.findPostByPostId(postId);
+        if(post == null)
+            return null;
+        post.setLikeCount(post.getLikeCount() + 1);
+        postRepo.save(post);
+        return post;
+    }
 }

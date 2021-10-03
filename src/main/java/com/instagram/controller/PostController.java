@@ -40,4 +40,9 @@ public class PostController {
     private ArrayList<Post> getPostsByUser(@PathVariable("uid") String uid) {
         return postService.displayPostsByUser(uid);
     }
+
+    @PostMapping("/like/{postId}")
+    private Post likeCountIncrease(@PathVariable("postId") int postId) {
+        return postService.likeCountUpdate(postId);
+    }
 }
