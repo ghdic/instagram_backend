@@ -1,6 +1,7 @@
-package com.instagram.Controller;
+package com.instagram.controller;
 
-import com.instagram.Service.UserService;
+import com.instagram.message.request.UserProfileReq;
+import com.instagram.service.UserService;
 import com.instagram.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -30,8 +31,8 @@ public class UserController {
     }
 
     @PostMapping("/{uid}")
-    private User updateUser(@PathVariable("uid") String uid, @RequestBody String userName, @RequestBody String nickName, @RequestBody String profileImage) {
-        return userService.updateUserData(uid, userName, nickName, profileImage);
+    private User updateUser(@PathVariable("uid") String uid, @RequestBody UserProfileReq userProfile) {
+        return userService.updateUserData(uid, userProfile.getUserName(), userProfile.getNickName(), userProfile.getProfileImage());
     }
 
     @GetMapping("/suggestions")

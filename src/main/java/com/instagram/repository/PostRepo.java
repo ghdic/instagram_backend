@@ -1,4 +1,4 @@
-package com.instagram.Repository;
+package com.instagram.repository;
 
 import com.instagram.model.Post;
 import org.springframework.data.domain.Sort;

@@ -1,6 +1,8 @@
-package com.instagram.Controller;
+package com.instagram.controller;
 
-import com.instagram.Service.PostService;
+import com.instagram.message.request.PostDataReq;
+import com.instagram.message.request.UidReq;
+import com.instagram.service.PostService;
 import com.instagram.model.Post;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -25,13 +27,13 @@ public class PostController {
     }
 
     @PostMapping("/{postId}")
-    private Post updateUserPost(@PathVariable("postId") int postId,  @RequestBody String uid, @RequestBody String content, @RequestBody String postPath) {
-        return postService.updatePostToDatabase(postId, uid, content, postPath);
+    private Post updateUserPost(@PathVariable("postId") int postId, @RequestBody PostDataReq postDataReq) {
+        return postService.updatePostToDatabase(postId, postDataReq.getUid(), postDataReq.getContent(), postDataReq.getPostPath());
     }
 
     @DeleteMapping("/{postId}")
-    private int deleteUserPost(@PathVariable("postId") int postId, @RequestBody String uid) {
-        return postService.deletePostToDatabase(postId, uid);
+    private int deleteUserPost(@PathVariable("postId") int postId, @RequestBody UidReq uidReq) {
+        return postService.deletePostToDatabase(postId, uidReq.getUid());
     }
 
     @GetMapping("/{uid}")

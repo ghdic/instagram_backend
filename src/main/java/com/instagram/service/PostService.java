@@ -1,8 +1,7 @@
-package com.instagram.Service;
+package com.instagram.service;
 
-import com.instagram.Repository.PostRepo;
+import com.instagram.repository.PostRepo;
 import com.instagram.model.Post;
-import com.instagram.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -11,8 +10,6 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 @Service
 public class PostService {

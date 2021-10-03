@@ -1,4 +1,4 @@
-package com.instagram.Repository;
+package com.instagram.repository;
 
 import com.instagram.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;

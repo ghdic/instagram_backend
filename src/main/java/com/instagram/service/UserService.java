@@ -1,10 +1,10 @@
-package com.instagram.Service;
+package com.instagram.service;
 
 
-import com.instagram.Repository.UserRepo;
+import com.instagram.message.request.UserProfileReq;
+import com.instagram.repository.UserRepo;
 import com.instagram.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;

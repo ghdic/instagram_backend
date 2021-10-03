@@ -1,6 +1,8 @@
-package com.instagram.Controller;
+package com.instagram.controller;
 
-import com.instagram.Service.CommentService;
+import com.instagram.message.request.CommentDataReq;
+import com.instagram.message.request.UidReq;
+import com.instagram.service.CommentService;
 import com.instagram.model.Comments;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -25,12 +27,12 @@ public class CommentController {
     }
 
     @PostMapping("/{commentId}")
-    private Comments updateComments(@PathVariable("commentId") int commentId, @RequestBody String uid, @RequestBody String content) {
-        return commentService.updateCommentToDB(commentId, uid, content);
+    private Comments updateComments(@PathVariable("commentId") int commentId, @RequestBody CommentDataReq commentDataReq) {
+        return commentService.updateCommentToDB(commentId, commentDataReq.getUid(), commentDataReq.getComment());
     }
 
     @DeleteMapping("/{commentId}")
-    private int deleteComents(@PathVariable("commentId") int commentId, @RequestBody String uid) {
-        return commentService.deleteCommentToDB(commentId, uid);
+    private int deleteComents(@PathVariable("commentId") int commentId, @RequestBody UidReq uidReq) {
+        return commentService.deleteCommentToDB(commentId, uidReq.getUid());
     }
 }

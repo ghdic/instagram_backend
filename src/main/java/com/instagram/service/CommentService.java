@@ -1,8 +1,7 @@
-package com.instagram.Service;
+package com.instagram.service;
 
-import com.instagram.Repository.CommentRepo;
+import com.instagram.repository.CommentRepo;
 import com.instagram.model.Comments;
-import com.instagram.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
